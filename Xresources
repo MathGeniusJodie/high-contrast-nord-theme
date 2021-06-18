@@ -21,15 +21,15 @@
 
 ! blue
 *.color4:       #6182a7
-*.color12:      #8cafd2
+*.color12:      #acd5ff
 
 ! magenta
 *.color5:       #9b7293
-*.color13:      #c49bbc
+*.color13:      #eebde5
 
 ! cyan
 *.color6:       #4e879e
-*.color14:      #94d1e2
+*.color14:      #a8ecff
 
 ! white
 *.color7:       #e5e9f0
