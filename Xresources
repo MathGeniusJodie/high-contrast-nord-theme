@@ -13,23 +13,23 @@
 
 ! green
 *.color2:       #6c8657
-*.color10:      #d2eeba
+*.color10:      #c6ffa2
 
 ! yellow
 *.color3:       #a07433
-*.color11:      #ffdc9b
+*.color11:      #ffdc95
 
 ! blue
 *.color4:       #6282a0
-*.color12:      #badbfc
+*.color12:      #6dbeff
 
 ! magenta
 *.color5:       #967290
-*.color13:      #f5cced
+*.color13:      #ffb1f2
 
 ! cyan
 *.color6:       #4e8594
-*.color14:      #cefdfc
+*.color14:      #6efefe
 
 ! white
 *.color7:       #e5e9f0
