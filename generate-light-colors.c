@@ -3,18 +3,20 @@
 typedef struct {unsigned char r,g,b;} srgb8;
 typedef struct {float r,g,b;} lrgbf;
 
-// red
-srgb8 c09 = {0xbf,0x61,0x6a};
-// green
-srgb8 c10 = {0xa3,0xbe,0x8c};
-// yellow
-srgb8 c11 = {0xeb,0xcb,0x8b};
-// blue
-srgb8 c12 = {0x81,0xa1,0xc1};
-// magenta
-srgb8 c13 = {0xb4,0x8e,0xad};
-// cyan
-srgb8 c14 = {0x88,0xc0,0xd0};
+srgb8 colors[] = {
+    // red
+    {0xbf,0x61,0x6a},
+    // green
+    {0xa3,0xbe,0x8c},
+    // yellow
+    {0xeb,0xcb,0x8b},
+    // blue
+    {0x81,0xa1,0xc1},
+    // magenta
+    {0xb4,0x8e,0xad},
+    // cyan
+    {0x88,0xc0,0xd0}
+};
 
 float to_gamma(float a){
 	return 0.0031308f >= a ? 12.92f * a : 1.055f * powf(a, 1.f / 2.4f) - 0.055f;
@@ -39,24 +41,27 @@ srgb8 lrgbf_to_srgb8(lrgbf l){
     };
 }
 
-srgb8 brighten(srgb8 c, float max){
-    lrgbf l = srgb8_to_lrgbf(c);
+lrgbf brighten(lrgbf l, float max){
     l.r/=max;
     l.g/=max;
     l.b/=max;
-    return lrgbf_to_srgb8(l);
+    return l;
 }
 
-void print_srgb8(srgb8 c){
-    printf("%x%x%x\n",c.r,c.g,c.b);
+void print_hex(lrgbf l){
+    srgb8 c = lrgbf_to_srgb8(l);
+    printf("%02x%02x%02x\n",c.r,c.g,c.b);
 }
+
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
 int main(){
-    float max = to_linear(((float)0xeb)/255.f);
-    print_srgb8(brighten(c09,max));
-    print_srgb8(brighten(c10,max));
-    print_srgb8(brighten(c11,max));
-    print_srgb8(brighten(c12,max));
-    print_srgb8(brighten(c13,max));
-    print_srgb8(brighten(c14,max));
+    int color_count = sizeof(colors)/sizeof(srgb8);
+    for(int i=0;i<color_count;i++){
+        lrgbf color = srgb8_to_lrgbf(colors[i]);
+        float max = MAX(color.r,MAX(color.g*1.2f,color.b));
+
+        printf("*.color%d: #",i+9);
+        print_hex(brighten(color,max));
+    }
 }
